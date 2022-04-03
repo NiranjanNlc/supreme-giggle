@@ -114,6 +114,127 @@ fun getNumberOfSuitableRoom(matrix: MutableList<MutableList<Int>>): Int {
  return s
 } 
 ```
+Given an array of strings, return another array containing all of its longest strings.
+```
+fun getArrayOfLongestString(inputArray: MutableList<String>): MutableList<String> {
+  var length1 = 0
+inputArray.forEach{
+    if(it.length > length1) length1 = it.length
+}
+return inputArray.filter{ it.length == length1}.toMutableList()
+}
+```
+Given two strings, find the number of common characters between them.
+```
+fun solution(s1: String, s2: String): Int {
+ 
+ var counter = 0
+ s1.toList().intersect(s2.toList()).forEach { 
+     x -> counter += listOf(s1.toList().count {it == x},s2.toList().count {it == x}).min()!! 
+     }
+return counter
+}
+```
+Ticket numbers usually consist of an even number of digits. A ticket number is considered lucky if the sum of the first half of the digits is equal to the sum of the second half.
+
+Given a ticket number n, determine if it's lucky or not
+```
+fun solution(n: Int): Boolean {
+ var n1 = n
+ var s1=0 
+ var s2= 0
+  var luckCalc = mutableListOf<Int>()
+  while(n1 > 0)
+  {
+      luckCalc.add(n1%10)
+      println(" ${n%10} addde from ${n1}" )
+      n1 = n1/10
+  }
+  val lngth = luckCalc.size
+  for ( i in 0 .. lngth -1 )
+  {
+      if(i <= lngth/2-1) s1 += luckCalc.get(i)
+      else s2 += luckCalc.get(i)
+      println( " $s1  $s2 ${luckCalc.get(i)}")
+  }
+  if(s1==s2) return true
+  return false
+}
+```
+Some people are standing in a row in a park. There are trees between them which cannot be moved. Your task is to rearrange the people by their heights in a non-descending order without moving the trees. People can be very tall!
+Example
+For a = [-1, 150, 190, 170, -1, -1, 160, 180], the output should be
+solution(a) = [-1, 150, 160, 170, -1, -1, 180, 190].
+```
+fun solution(a: MutableList<Int>): MutableList<Int> {
+var required = a.filter { it!=-1 }.sorted().toMutableList()
+var returnig = mutableListOf<Int>()
+var x = 0  
+for( j in 0 .. a.size -1 )
+{
+    if(a.get(j)==-1) returnig.add(-1)
+    else 
+    {
+        returnig.add(required.get(x))
+        x= x+1
+    } 
+}
+ return returnig
+}
+```
+Write a function that reverses characters in (possibly nested) parentheses in the input string.
+
+Input strings will always be well-formed with matching ()s.
+```
+String solution(String str ) {
+    var len = str.length();
+    Stack<Integer> st = new Stack<Integer>();
+    for (int i = 0; i < len; i++)
+    {
+       
+      // Push the index of the current
+      // opening bracket
+      if (str.charAt(i) == '(')
+      {
+        st.push(i);
+      }
+       
+      // Reverse the substring starting
+      // after the last encountered opening
+      // bracket till the current character
+      else if (str.charAt(i) == ')')
+      {
+        char[] A = str.toCharArray();
+        reverse(A, st.peek() + 1, i);
+        str = String.copyValueOf(A);
+        st.pop();
+      }
+    }
+     
+    // To store the modified string
+    String res = "";
+    for (int i = 0; i < len; i++)
+    {
+      if (str.charAt(i) != ')' && str.charAt(i) != '(')
+      {
+        res += (str.charAt(i));
+      }
+    }
+    return res;
+}
+
+static void reverse(char A[], int l, int h)
+  {
+    if (l < h)
+    {
+      char ch = A[l];
+      A[l] = A[h];
+      A[h] = ch;
+      reverse(A, l + 1, h - 1);
+    }
+  }
+```
+
 
 
 
