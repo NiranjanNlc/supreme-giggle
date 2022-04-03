@@ -324,6 +324,27 @@ fun solution(inputString: String): Boolean
 }
 
 ```
+Define a word as a sequence of consecutive English letters. Find the longest word from the given string.
+```
+fun solution(text: String): String {
+ 
+  var parts = text.split("[^A-Za-z0-9]".toRegex())
+  println(parts)
+  var longest = String()
+  var length = 0
+  for( i in parts )
+  {
+      println(i)
+   if(i.length > length) 
+   {
+       longest = i   
+        length = i.length
+   }
+  } 
+  return longest
+}
+```
+
 
 
 
